@@ -9,4 +9,5 @@ import reactor.core.publisher.Mono
 @Repository
 interface CategoryRepository : ReactiveMongoRepository<Category, String> {
     fun findByCategoryName(categoryName: String): Mono<Category>
+    fun findByDepth(depth: Int): Flux<Category>
 }

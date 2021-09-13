@@ -41,6 +41,11 @@ class CategoryController(
         return categoryRepository.findByCategoryName(categoryName)
     }
 
+    @GetMapping("/byDepth/{depth}")
+    fun getCategoryByDepth(@PathVariable("depth") depth: Int): Flux<Category> {
+        return categoryRepository.findByDepth(depth)
+    }
+
     @PostMapping("/createParentChildRelation")
     fun createParentChildRelation(@RequestParam("parentCatId") parentCatId: String, @RequestParam("childCatId") childCatId: String): String {
         return categoryNodeRepository.createChildParentRelation(parentCatId, childCatId)
