@@ -31,6 +31,11 @@ class CategoryController(
         return categoryFlux.flatMap { categoryRepository.save(it) }
     }
 
+    @GetMapping
+    fun getAllCategories(): Flux<Category> {
+        return categoryRepository.findAll();
+    }
+
     @GetMapping("/{categoryName}")
     fun getCategoryByName(@PathVariable("categoryName") categoryName: String): Mono<Category> {
         return categoryRepository.findByCategoryName(categoryName)

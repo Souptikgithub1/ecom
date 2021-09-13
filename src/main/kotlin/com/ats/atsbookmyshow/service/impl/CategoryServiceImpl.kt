@@ -6,7 +6,6 @@ import com.ats.atsbookmyshow.graphdomain.CategoryNode
 import com.ats.atsbookmyshow.graphrepository.CategoryNodeRepository
 import com.ats.atsbookmyshow.repository.CategoryRepository
 import com.ats.atsbookmyshow.service.CategoryService
-import org.springframework.beans.BeanUtils
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
@@ -31,8 +30,13 @@ class CategoryServiceImpl(
                 it.activeIndicator, null))
             }
             .doOnNext {
-                categoryNodeRepository.createChildParentRelation(categoryRequestDto.parentCategoryId,
-                it.categoryId)
+                 var result = if (null!=categoryRequestDto.parentCategoryId && categoryRequestDto.parentCategoryId!="") {
+                     categoryNodeRepository.createChildParentRelation(categoryRequestDto.parentCategoryId,
+                        it.categoryId)
+                } else {
+                    true
+                }
+                result
             }
     }
 }
