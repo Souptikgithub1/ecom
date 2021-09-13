@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/categories")
+@CrossOrigin
 class CategoryController(
     var categoryRepository: CategoryRepository,
     var categoryService: CategoryService,
