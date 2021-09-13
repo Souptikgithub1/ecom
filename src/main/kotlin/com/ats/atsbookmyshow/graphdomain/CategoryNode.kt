@@ -11,6 +11,7 @@ data class CategoryNode(
     val categoryDescription: String? = null,
     val depth: Int? = 0,
     val activeIndicator: Boolean? = true,
+    val parentCategoryId: String? = null,
 
     @Id @GeneratedValue
     var id: Long?

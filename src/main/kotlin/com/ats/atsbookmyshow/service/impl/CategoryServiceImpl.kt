@@ -20,14 +20,15 @@ class CategoryServiceImpl(
             Category(categoryRequestDto.categoryName,
             categoryRequestDto.categoryDescription,
             categoryRequestDto.depth,
-            categoryRequestDto.activeIndicator)
+            categoryRequestDto.activeIndicator,
+            categoryRequestDto.parentCategoryId)
         )
             .doOnNext {
                 categoryNodeRepository.save(CategoryNode(it.categoryId,
                 it.categoryName,
                 it.categoryDescription,
                 it.depth,
-                it.activeIndicator, null))
+                it.activeIndicator, it.parentCategoryId, null))
             }
             .doOnNext {
                  var result = if (null!=categoryRequestDto.parentCategoryId && categoryRequestDto.parentCategoryId!="") {
