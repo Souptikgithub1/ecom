@@ -9,6 +9,7 @@ data class CategoryNode(
     val categoryId: String? = null,
     val categoryName: String? = null,
     val categoryDescription: String? = null,
+    val depth: Int? = 0,
     val activeIndicator: Boolean? = true,
 
     @Id @GeneratedValue

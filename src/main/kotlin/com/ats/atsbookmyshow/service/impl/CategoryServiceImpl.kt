@@ -20,12 +20,14 @@ class CategoryServiceImpl(
         return categoryRepository.save(
             Category(categoryRequestDto.categoryName,
             categoryRequestDto.categoryDescription,
+            categoryRequestDto.depth,
             categoryRequestDto.activeIndicator)
         )
             .doOnNext {
                 categoryNodeRepository.save(CategoryNode(it.categoryId,
                 it.categoryName,
                 it.categoryDescription,
+                it.depth,
                 it.activeIndicator, null))
             }
             .doOnNext {

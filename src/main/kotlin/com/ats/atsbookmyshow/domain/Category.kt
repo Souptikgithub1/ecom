@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Category(
     val categoryName: String? = null,
     val categoryDescription: String? = null,
+    val depth: Int? = 0,
     val activeIndicator: Boolean? = true,
 
     @Id
