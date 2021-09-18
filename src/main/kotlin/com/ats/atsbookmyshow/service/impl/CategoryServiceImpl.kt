@@ -6,13 +6,16 @@ import com.ats.atsbookmyshow.graphdomain.CategoryNode
 import com.ats.atsbookmyshow.graphrepository.CategoryNodeRepository
 import com.ats.atsbookmyshow.repository.CategoryRepository
 import com.ats.atsbookmyshow.service.CategoryService
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
 class CategoryServiceImpl(
     val categoryRepository: CategoryRepository,
-    val categoryNodeRepository: CategoryNodeRepository
+    val categoryNodeRepository: CategoryNodeRepository,
+    var reactiveMongoTemplate: ReactiveMongoTemplate
     ): CategoryService {
 
     override fun createCategory(categoryRequestDto: CategoryRequestDto): Mono<Category> {
@@ -40,4 +43,10 @@ class CategoryServiceImpl(
                 result
             }
     }
+
+    override fun findDistinctDepths(): Flux<Int> {
+        return reactiveMongoTemplate.findDistinct("depth", Category::class.java, Int::class.java)
+    }
+
+
 }

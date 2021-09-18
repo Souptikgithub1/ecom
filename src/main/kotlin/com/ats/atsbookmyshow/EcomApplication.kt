@@ -5,12 +5,14 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories
 import java.util.stream.Collectors
 
 
 @SpringBootApplication
 @EnableNeo4jRepositories
+@EnableReactiveMongoRepositories
 @OpenAPIDefinition(info = Info(title = "Ecom APis", version = "3.0.3", description = "Documentation APIs v3.0.3"))
 class EcomApplication
 

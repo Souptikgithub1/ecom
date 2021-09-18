@@ -17,4 +17,7 @@ interface CategoryNodeRepository: Neo4jRepository<CategoryNode, Long> {
     fun createParentChildrenRelation(parentCategoryId: String?, childCategoryId: List<String>?): List<String>
 
     fun findByDepth(depth: Int): List<CategoryNode>
+
+    @Query("MATCH (p:Category)<-[:BELONGS_TO*0..]-(c:Category) where c.categoryId=\$categoryId return p")
+    fun findAllParentByCategoryId(categoryId: String): List<CategoryNode>
 }
