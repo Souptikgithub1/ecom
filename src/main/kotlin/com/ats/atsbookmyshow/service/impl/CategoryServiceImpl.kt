@@ -7,6 +7,11 @@ import com.ats.atsbookmyshow.graphrepository.CategoryNodeRepository
 import com.ats.atsbookmyshow.repository.CategoryRepository
 import com.ats.atsbookmyshow.service.CategoryService
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
+import org.springframework.data.mongodb.core.find
+import org.springframework.data.mongodb.core.findAll
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
+import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -46,6 +51,19 @@ class CategoryServiceImpl(
 
     override fun findDistinctDepths(): Flux<Int> {
         return reactiveMongoTemplate.findDistinct("depth", Category::class.java, Int::class.java)
+    }
+
+    override fun findCategories(): Flux<MutableMap<String, Any>> {
+        val query = Query();
+        query.addCriteria(Criteria.where("categoryName").isEqualTo("Electronics"))
+        return reactiveMongoTemplate.findAll<MutableMap<String, Any>>("category").map { x ->
+            x["categoryId"] = x["_id"].toString()
+            x.remove("_id")
+            x }
+        /*return reactiveMongoTemplate.find<MutableMap<String, Any>>(query, "category").map { x ->
+            x["categoryId"] = x["_id"].toString()
+            x.remove("_id")
+            x }*/
     }
 
 

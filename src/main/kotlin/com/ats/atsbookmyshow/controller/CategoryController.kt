@@ -7,6 +7,7 @@ import com.ats.atsbookmyshow.graphrepository.CategoryNodeRepository
 import com.ats.atsbookmyshow.graphservice.CategoryNodeService
 import com.ats.atsbookmyshow.repository.CategoryRepository
 import com.ats.atsbookmyshow.service.CategoryService
+import org.bson.types.ObjectId
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
@@ -72,5 +73,10 @@ class CategoryController(
     @GetMapping("/distinctdepth")
     fun findDistinctDepths(): Flux<Int> {
         return categoryService.findDistinctDepths()
+    }
+
+    @GetMapping("/test")
+    fun test(): Flux<MutableMap<String, Any>> {
+        return categoryService.findCategories()
     }
 }

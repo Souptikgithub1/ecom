@@ -8,4 +8,5 @@ import reactor.core.publisher.Mono
 interface CategoryService {
     fun createCategory(categoryRequestDto: CategoryRequestDto): Mono<Category>
     fun findDistinctDepths(): Flux<Int>
+    fun findCategories(): Flux<MutableMap<String, Any>>
 }
