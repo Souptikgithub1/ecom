@@ -56,10 +56,12 @@ class CategoryServiceImpl(
     override fun findCategories(): Flux<MutableMap<String, Any>> {
         val query = Query();
         query.addCriteria(Criteria.where("categoryName").isEqualTo("Electronics"))
-        return reactiveMongoTemplate.findAll<MutableMap<String, Any>>("category").map { x ->
-            x["categoryId"] = x["_id"].toString()
-            x.remove("_id")
-            x }
+        return reactiveMongoTemplate.findAll<MutableMap<String, Any>>("category")
+            .map { x ->
+                x["categoryId"] = x["_id"].toString()
+                x.remove("_id")
+                x
+            }
         /*return reactiveMongoTemplate.find<MutableMap<String, Any>>(query, "category").map { x ->
             x["categoryId"] = x["_id"].toString()
             x.remove("_id")
