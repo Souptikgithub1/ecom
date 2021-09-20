@@ -7,9 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document("attribute")
 data class Attribute(
     @Id
-    val attributeId: String? = ObjectId.get().toHexString(),
-    val attributeName: String? = null,
-    val uoms: List<String>? = mutableListOf(),
-    val validValues: List<String>? = mutableListOf(),
-    val dataType: String? = null
+    var attributeId: String? = ObjectId.get().toHexString(),
+    var attributeName: String? = null,
+    var uoms: List<String>? = mutableListOf(),
+    var validValues: List<String>? = mutableListOf(),
+    var dataType: String? = null,
+    var attributeGroup: String? = null
 )

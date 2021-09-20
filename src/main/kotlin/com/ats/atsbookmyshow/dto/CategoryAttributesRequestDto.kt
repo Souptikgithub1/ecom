@@ -3,6 +3,9 @@ package com.ats.atsbookmyshow.dto
 import com.ats.atsbookmyshow.domain.Attribute
 
 data class CategoryAttributesRequestDto(
-    val categoryId: String? = null,
-    val attributes: MutableList<Attribute>? = mutableListOf()
+    var categoryId: String,
+    var attributeId: String,
+
+    var uoms: MutableList<String>,
+    var validValues: MutableList<String>? = mutableListOf(),
 )

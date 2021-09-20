@@ -5,13 +5,13 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document("category")
-data class Category(
-    val categoryName: String? = null,
-    val categoryDescription: String? = null,
-    val depth: Int? = 0,
-    val activeIndicator: Boolean? = true,
-    val parentCategoryId: String? = null,
+open class Category(
+    var categoryName: String? = null,
+    var categoryDescription: String? = null,
+    var depth: Int? = 0,
+    var activeIndicator: Boolean? = true,
+    var parentCategoryId: String? = null,
 
     @Id
-    val categoryId: String? = ObjectId.get().toHexString()
+    var categoryId: String? = ObjectId.get().toHexString()
 )
