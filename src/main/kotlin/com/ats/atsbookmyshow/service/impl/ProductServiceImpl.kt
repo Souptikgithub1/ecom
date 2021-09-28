@@ -2,9 +2,13 @@ package com.ats.atsbookmyshow.service.impl
 
 import com.ats.atsbookmyshow.service.ProductService
 import com.ats.atsbookmyshow.utils.StringConstants
+import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
+import org.springframework.data.mongodb.core.find
 import org.springframework.data.mongodb.core.findAll
 import org.springframework.data.mongodb.core.findById
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -21,6 +25,13 @@ class ProductServiceImpl(
     override fun findAll(): Flux<MutableMap<String, Any>> {
         return reactiveMongoTemplate.findAll<MutableMap<String, Any>>(StringConstants.PRODUCT_COLLECTION)
             . map { parseProduct(it) }
+    }
+
+    override fun find6Products(): Flux<MutableMap<String, Any>> {
+        val query = Query()
+        query.limit(6)
+        return reactiveMongoTemplate.find<MutableMap<String, Any>>(query, StringConstants.PRODUCT_COLLECTION)
+            .map { parseProduct(it) }
     }
 
     override fun findById(id: String): Mono<MutableMap<String, Any>> {

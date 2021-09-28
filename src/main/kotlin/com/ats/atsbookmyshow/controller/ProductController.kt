@@ -26,4 +26,9 @@ class ProductController(
     fun findById(@PathVariable("id") id: String): Mono<MutableMap<String, Any>> {
         return productService.findById(id)
     }
+
+    @GetMapping("/first6")
+    fun first6products(): Flux<MutableMap<String, Any>> {
+        return productService.find6Products()
+    }
 }

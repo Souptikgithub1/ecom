@@ -6,6 +6,7 @@ import com.ats.atsbookmyshow.graphdomain.CategoryNode
 import com.ats.atsbookmyshow.graphrepository.CategoryNodeRepository
 import com.ats.atsbookmyshow.repository.CategoryRepository
 import com.ats.atsbookmyshow.service.CategoryService
+import com.ats.atsbookmyshow.utils.StringConstants
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.find
 import org.springframework.data.mongodb.core.findAll
@@ -56,7 +57,7 @@ class CategoryServiceImpl(
     override fun findCategories(): Flux<MutableMap<String, Any>> {
         val query = Query();
         query.addCriteria(Criteria.where("categoryName").isEqualTo("Electronics"))
-        return reactiveMongoTemplate.findAll<MutableMap<String, Any>>("category")
+        return reactiveMongoTemplate.findAll<MutableMap<String, Any>>(StringConstants.CATEGORY_COLLECTION)
             .map { x ->
                 x["categoryId"] = x["_id"].toString()
                 x.remove("_id")
