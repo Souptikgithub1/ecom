@@ -18,7 +18,7 @@ class AttributeController(
     fun create(@RequestBody attribute: Attribute): Mono<Attribute> = attributeRepository.save(attribute)
 
     @PostMapping("/search")
-    fun search(@RequestParam(value = "searchValue", required = false) searchValue: String,
+    fun search(@RequestParam(value = "searchValue", required = false, defaultValue = "") searchValue: String,
                @RequestParam(value = "page", defaultValue = "1", required = false) page: Int,
                @RequestParam(value = "pageSize", defaultValue = "10", required = false) pageSize: Int): Flux<Attribute> {
         return attributeService.search(searchValue, page, pageSize)
