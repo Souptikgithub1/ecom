@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/attributes")
+@CrossOrigin
 class AttributeController(
     val attributeRepository: AttributeRepository,
     val attributeService: AttributeService
