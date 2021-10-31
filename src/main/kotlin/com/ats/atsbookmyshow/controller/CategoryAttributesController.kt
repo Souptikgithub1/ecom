@@ -5,11 +5,10 @@ import com.ats.atsbookmyshow.dto.CategoryAttributesRequestDto
 import com.ats.atsbookmyshow.repository.AttributeRepository
 import com.ats.atsbookmyshow.repository.CategoryAttributesRepository
 import com.ats.atsbookmyshow.repository.CategoryRepository
+import com.ats.atsbookmyshow.service.CategoryAttributeService
 import com.ats.atsbookmyshow.utils.CommonUtils
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
@@ -17,7 +16,8 @@ import reactor.core.publisher.Mono
 class CategoryAttributesController(
     val categoryAttributesRepository: CategoryAttributesRepository,
     val categoryRepository: CategoryRepository,
-    val attributeRepository: AttributeRepository
+    val attributeRepository: AttributeRepository,
+    val categoryAttributeService: CategoryAttributeService
 ) {
 
     /*@PostMapping
@@ -53,5 +53,13 @@ class CategoryAttributesController(
                         categoryAttributesRepository.save(categoryAttribute)
                     }
             }
+    }
+
+    @PostMapping("/search/{categoryId}")
+    fun searchCategoryAttributes(@PathVariable("categoryId") categoryId: String,
+                                 @RequestParam(value = "searchValue", required = false, defaultValue = "") searchValue: String,
+                                 @RequestParam(value = "page", defaultValue = "1", required = false) page: Int,
+                                 @RequestParam(value = "pageSize", defaultValue = "10", required = false) pageSize: Int): Flux<CategoryAttribute> {
+        return categoryAttributeService.search(categoryId, searchValue, page, pageSize);
     }
 }
