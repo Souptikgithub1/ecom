@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping("/categoryattributes")
+@CrossOrigin
 class CategoryAttributesController(
     val categoryAttributesRepository: CategoryAttributesRepository,
     val categoryRepository: CategoryRepository,
