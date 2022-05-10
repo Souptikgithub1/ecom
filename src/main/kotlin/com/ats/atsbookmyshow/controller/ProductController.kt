@@ -29,6 +29,7 @@ class ProductController(
 
     @GetMapping("/first6")
     fun first6products(): Flux<MutableMap<String, Any>> {
+
         return productService.find6Products()
     }
 }
