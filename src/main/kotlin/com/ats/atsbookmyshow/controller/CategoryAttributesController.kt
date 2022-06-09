@@ -61,6 +61,6 @@ class CategoryAttributesController(
                                  @RequestParam(value = "searchValue", required = false, defaultValue = "") searchValue: String,
                                  @RequestParam(value = "page", defaultValue = "1", required = false) page: Int,
                                  @RequestParam(value = "pageSize", defaultValue = "10", required = false) pageSize: Int): Flux<CategoryAttribute> {
-        return categoryAttributeService.search(categoryId, searchValue, page, pageSize);
+        return categoryAttributeService.search(categoryId, searchValue, page, pageSize)
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories
-import java.util.stream.Collectors
+import reactor.core.publisher.Flux
 
 
 @SpringBootApplication
@@ -16,13 +16,31 @@ import java.util.stream.Collectors
 @OpenAPIDefinition(info = Info(title = "Ecom APis", version = "3.0.3", description = "Documentation APIs v3.0.3"))
 class EcomApplication
 
+var <T> List<T>.lengooth: Int
+  get() = size
+	set(value) {}
+
 fun main(args: Array<String>) {
 	runApplication<EcomApplication>(*args)
-	program1()
+	var s: String? = "abcd"
+	s = null
+
+	println(s?.length ?: -1)
+	println(mutableListOf(1, 4, 5, 6, 7, 8).takeWhile { it.rem(4)==0 })
+}
+
+fun program2() {
+	val square: (Int) -> Int = { x -> x * x}
+	println(square(3))
+	//program1()
+	val list = listOf("sk", "ramu", "Amit")
+
+	//println(list.findByCondition { it == "ramu" })
+	println(list.lengooth)
 }
 
 fun program1() {
-	println("Karmakar".groupingBy { it.toLowerCase() }.eachCount())
+	println("Karmakar".groupingBy { it.lowercaseChar() }.eachCount())
 	val finalList = listOf("Souptik", "Amit", "Albam", "Jeelani", null)
 						.filter { null!=it && !it.startsWith("A") }
 	println(finalList)
@@ -30,4 +48,14 @@ fun program1() {
 	val empList = listOf(Employee("Aaron", listOf("Cricket", "Football")),
 		Employee("David", listOf("Cricket")),
 		Employee("Steve", listOf("Football")))
+}
+
+fun <T> List<T>.findByCondition(func: (T) -> Boolean): Boolean {
+
+	for (e in this) {
+		if (func(e)) {
+			return true
+		}
+	}
+	return false
 }
